@@ -38,6 +38,12 @@ app.get('/api/fortune', (req, res) => {
 
   res.status(200).send(randomCompliment);
 })
-
+app.post('/api/fortune', (req, res) => {
+  let { fortunes } = req.body;
+  console.log(fortunes); 
+  fortune.push(fortunes);
+  console.log(fortune);
+  res.status(200).send(fortune);
+})
 
 app.listen(4000, () => console.log("Server running on 4000"));

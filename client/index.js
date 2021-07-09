@@ -1,9 +1,14 @@
+
+
 const cryptoBtn = document.querySelector('#cryptoBtn');
 const cryptoText = document.querySelector('#cryptoText');
 const cryptoForm = document.querySelector('#cryptoPrice');
 const cryptoDiv = document.querySelector('#cryptoDiv');
 const cryptoH1 = document.querySelector('#cryptoH1');
 const pokeBtn = document.querySelector('#pokeBtn');
+const chuck = document.querySelector('#chuck');
+const fortuneText = document.querySelector('#fortuneText');
+const fortuneForm = document.querySelector('#fortuneForm');
 
 document.getElementById("complimentButton").onclick = function () {
     axios.get("http://localhost:4000/api/compliment/")
@@ -43,13 +48,25 @@ document.getElementById("complimentButton").onclick = function () {
       cryptoText.value = "";
     })
   }
-  const chuck = document.querySelector('#chuck');
+  
   const chuckJoke = () => {
       axios.get('https://api.chucknorris.io/jokes/random').then((res) => {
           alert(res.data.value);
       })
   }
-  
+  const newFortune = (e) => {
+    e.preventDefault()
+    const data = {
+        fortunes: fortuneText.value
+    }
+    axios.post('http://localhost:4000/api/fortune', data).then((res) => {
+        const bodyObj = {
+            forutunes: fortuneText.value
+        }
+    })
+  }
+
+  fortuneForm.addEventListener('submit', newFortune);
   cryptoForm.addEventListener('submit', getCryptoPrice);
   pokeBtn.addEventListener('click', randomPokeGen);
   chuck.addEventListener('click', chuckJoke);
